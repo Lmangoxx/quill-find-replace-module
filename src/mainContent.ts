@@ -160,6 +160,7 @@ export default class MainContent {
   public update(props: PropsType) {
     if (this.props.value !== props.value) {
       this.root.findBox.inputEl.value = props.value;
+      this._onInputValueChange();
     }
     Object.assign(this.props, props);
   }

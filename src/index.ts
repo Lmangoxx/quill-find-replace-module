@@ -41,6 +41,7 @@ export default class FindReplace {
     this.mainContent = null;
     this.highlightCanvas = new HighlightCanvas(quill, { activeColor: '#accaec' });
 
+    // 添加查找替换唤起快捷键
     document.addEventListener('keydown', this.handleKeydown, false)
   }
 
@@ -87,7 +88,9 @@ export default class FindReplace {
     ) {
       oEvent.preventDefault();
       this.type = nKeyCode === 70 ? 'find' : 'replace';
-      isHide ? (this.show()) : (this.render());
+      isHide
+        ? (this.show())
+        : (this.render());
     }
   }
 
