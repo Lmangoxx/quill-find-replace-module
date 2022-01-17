@@ -24,10 +24,11 @@ export default class MainContent {
     this._moveStartClient = [0, 0];
     this._constructorPosition = [0, 0];
 
-    this._onInputValueChange();
+    this._onValueChange();
   }
 
-  private _onInputValueChange: () => void = (() => {
+  // 搜索文本发现改变时触发
+  private _onValueChange: () => void = (() => {
     let time: NodeJS.Timeout | null = null;
     return () => {
       if (time) {
@@ -40,6 +41,7 @@ export default class MainContent {
     }
   })();
 
+  // 渲染查找替换框拖动标签
   private _renderMoveBox(): HTMLElement {
     const el = document.createElement('DIV');
     el.classList.add(`${MainContent.NAMESPACE_CLASS}--move`);
@@ -92,6 +94,7 @@ export default class MainContent {
     return el;
   }
 
+  // 渲染查找替换框关闭按钮
   private _renderCloseBox(): HTMLElement {
     const el = document.createElement('SPAN');
     el.classList.add(`${MainContent.NAMESPACE_CLASS}--close`);
@@ -99,13 +102,7 @@ export default class MainContent {
     return el;
   }
 
-  private _findInputFocus():void {
-    setTimeout(() => {
-      const inputEl = this.root.findBox.inputEl;
-      inputEl && inputEl.focus();
-    });
-  }
-
+  // 渲染查找功能框
   private _renderFindBox(): HTMLElement {
     const el: any = document.createElement('div');
     el.classList.add(`${MainContent.NAMESPACE_CLASS}--find`);
@@ -119,7 +116,7 @@ export default class MainContent {
     inputEl.placeholder = '请输入查找内容';
     inputEl.addEventListener('input', (e: any) => {
       this.props.value = e.target.value;
-      this._onInputValueChange();
+      this._onValueChange();
     });
     this._findInputFocus();
     el.inputEl = inputEl;
@@ -138,6 +135,15 @@ export default class MainContent {
     return el;
   }
 
+  // 查找输入框获取焦点
+  private _findInputFocus():void {
+    setTimeout(() => {
+      const inputEl = this.root.findBox.inputEl;
+      inputEl && inputEl.focus();
+    });
+  }
+
+  // 渲染查找替换功能框
   private _render(parentContainer: any): HTMLElement {
     // 渲染moveBox
     parentContainer.moveBox = this._renderMoveBox();
@@ -157,10 +163,11 @@ export default class MainContent {
     return parentContainer;
   }
 
+  // 更新查找替换框
   public update(props: PropsType) {
     if (this.props.value !== props.value) {
       this.root.findBox.inputEl.value = props.value;
-      this._onInputValueChange();
+      this._onValueChange();
     }
     Object.assign(this.props, props);
   }
