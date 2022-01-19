@@ -4,3 +4,7 @@ const quill = new Quill('#editor', {
     findReplace: true
 	}
 });
+
+
+const findReplaceModule = quill.getModule('findReplace');
+findReplaceModule.show();
