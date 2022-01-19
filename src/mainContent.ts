@@ -1,10 +1,15 @@
-import { Type } from './index';
+import { Type, RangeType } from './types';
 
 type PropsType = {
+  preIcon: string;
+  nextIcon: string;
   type: Type;
   value: string;
+  data: RangeType[];
+  index: number;
   onSearchChange: (value: string) => void;
   onClose: () => void;
+  onCutover: (index: number) => void;
 };
 
 export default class MainContent {
@@ -104,8 +109,17 @@ export default class MainContent {
 
   // 渲染查找功能框
   private _renderFindBox(): HTMLElement {
-    const el: any = document.createElement('div');
+    const el: any = document.createElement('DIV');
     el.classList.add(`${MainContent.NAMESPACE_CLASS}--find`);
+
+    const btnEl = document.createElement('BUTTON') as HTMLElement;
+    btnEl.classList.add(`${MainContent.NAMESPACE_CLASS}--find-button`);
+    btnEl.innerHTML = '查找';
+    btnEl.addEventListener('click', () => {
+      let _type: Type = this.props.type === 'find' ? 'replace' : 'find';
+      this.props.type = _type;
+    });
+    el.btnEl = btnEl;
 
     const inputEl = document.createElement('INPUT') as HTMLInputElement;
     inputEl.classList.add(`${MainContent.NAMESPACE_CLASS}--find-input`);
@@ -118,21 +132,71 @@ export default class MainContent {
       this.props.value = e.target.value;
       this._onValueChange();
     });
+    inputEl.addEventListener('keydown', this._findInputKeyDown);
     this._findInputFocus();
     el.inputEl = inputEl;
 
-    const btnEl = document.createElement('BUTTON');
-    btnEl.classList.add(`${MainContent.NAMESPACE_CLASS}--find-button`);
-    btnEl.innerHTML = '查找';
-    btnEl.addEventListener('click', () => {
-      let _type: Type = this.props.type === 'find' ? 'replace' : 'find';
-      this.props.type = _type;
-    });
-    el.btnEl = btnEl;
+    const resultEl = this._renderFindResult();
+    el.resultEl = resultEl;
 
-    el.append(btnEl, inputEl);
+    el.append(btnEl, inputEl, resultEl);
 
     return el;
+  }
+
+  private _renderFindResult(): HTMLElement {
+    const resultEl: any = document.createElement('DIV');
+    resultEl.classList.add(`${MainContent.NAMESPACE_CLASS}--find-result`);
+
+    resultEl.preBtn = document.createElement('SPAN');
+    resultEl.preBtn.classList.add('result-action-item', 'result-pre');
+    resultEl.preBtn.innerHTML = this.props.preIcon;
+    resultEl.preBtn.addEventListener('click', () => this._onArrowClick(-1))
+
+    resultEl.text = document.createElement('SPAN');
+    resultEl.text.classList.add('result-text');
+
+    resultEl.nextBtn = document.createElement('SPAN');
+    resultEl.nextBtn.classList.add('result-action-item', 'result-next');
+    resultEl.nextBtn.innerHTML = this.props.nextIcon;
+    resultEl.nextBtn.addEventListener('click', () => this._onArrowClick(1))
+
+    resultEl.append(resultEl.preBtn, resultEl.text, resultEl.nextBtn);
+
+    return resultEl;
+  }
+
+  private _updateFindResult() {
+    const resultEl = this.root.findBox.resultEl
+
+    if (!resultEl) return
+
+    if (this.props.value) {
+      if (this.props.data.length) {
+        resultEl.text.innerHTML = `${this.props.index + 1}/${this.props.data.length}`
+      } else {
+        resultEl.text.innerHTML = '未找到'
+      }
+      resultEl.classList.toggle('no-found', !this.props.data.length)
+      resultEl.classList.toggle('found', this.props.data.length)
+    } else {
+      resultEl.classList.toggle('no-found', false)
+      resultEl.classList.toggle('found', false)
+      resultEl.text.innerHTML = ''
+    }
+  }
+
+  private _onArrowClick (value: 1 | -1) {
+    let i = this.props.index + value;
+    if (i < 0) {
+      i = this.props.data.length - 1;
+    }
+    if (i >= this.props.data.length) {
+      i = 0;
+    }
+    this.props.index = i;
+    this._updateFindResult();
+    this.props.onCutover(i);
   }
 
   // 查找输入框获取焦点
@@ -142,6 +206,13 @@ export default class MainContent {
       inputEl && inputEl.focus();
     });
   }
+
+  private _findInputKeyDown = (e: KeyboardEvent) => {
+    const oEvent = e || window.event;
+    if (oEvent.keyCode === 13 && this.props.data.length) {
+      this._onArrowClick(1)
+    }
+  };
 
   // 渲染查找替换功能框
   private _render(parentContainer: any): HTMLElement {
@@ -169,6 +240,10 @@ export default class MainContent {
       this.root.findBox.inputEl.value = props.value;
       this._onValueChange();
     }
+
     Object.assign(this.props, props);
+
+    this._findInputFocus();
+    this._updateFindResult();
   }
 }

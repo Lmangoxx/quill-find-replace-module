@@ -1,23 +1,15 @@
 import Quill from 'quill';
 import HighlightCanvas from './highlightCanvas';
 import MainContent from './mainContent';
-import { tuple } from './utils/type';
+import { Type, RangeType, OptionsType } from './types'
 
 import '../assets/style.less';
-
-const Types = tuple('find', 'replace');
-export type Type = typeof Types[number];
-
-type RangeType = {
-  index: number;
-  name: string;
-  color: string;
-  length: number;
-}
 
 const Delta = Quill.import('delta');
 
 export default class FindReplace {
+  static DEFAULTS: OptionsType;
+
   quill: any;
   options: any;
   container: HTMLDivElement;
@@ -32,6 +24,7 @@ export default class FindReplace {
   constructor(quill: any, options = {}) {
     this.quill = quill;
     this.options = options;
+    console.log(this.options);
     this.color = 'rgb(245, 212, 122)';
     this.type = 'find';
     this.index = 0;
@@ -39,7 +32,10 @@ export default class FindReplace {
     this.data = [];
     this.container = this.buildContainer();
     this.mainContent = null;
-    this.highlightCanvas = new HighlightCanvas(quill, { activeColor: '#accaec' });
+    this.highlightCanvas = new HighlightCanvas(quill, {
+      defaultBackground: this.options.resultBackground,
+      activeBackground: this.options.activeResultBackground
+    });
 
     // 添加查找替换唤起快捷键
     document.addEventListener('keydown', this.handleKeydown, false)
@@ -56,6 +52,9 @@ export default class FindReplace {
     ].join(';'));
     const container = document.createElement('div');
     container.classList.add('ql-find-replace-container', 'ql-hidden');
+    if (this.options.customClass) {
+      container.classList.add(this.options.customClass)
+    }
     container.setAttribute('style', [
       'position: absolute',
       `top: 10px`,
@@ -98,7 +97,6 @@ export default class FindReplace {
     if (typeof value === 'string') this.value = value;
     this.data = this.highlightCanvas.searchMatchText({
       name: this.value,
-      color: this.color,
     });
     this.render();
   }
@@ -170,6 +168,8 @@ export default class FindReplace {
 
   render() {
     const options = {
+      preIcon: this.options.resultPreIcon,
+      nextIcon: this.options.resultNextIcon,
       value: this.value,
       index: this.index,
       data: this.data,
@@ -191,6 +191,14 @@ export default class FindReplace {
     this.quill.off(this.quill.constructor.events.TEXT_CHANGE, this.onTextChange);
     this.quill.off(this.quill.constructor.events.SELECTION_CHANGE, this.onSelectionChange);
   }
+}
+
+FindReplace.DEFAULTS = {
+  customClass: '',
+  resultBackground: 'rgb(245, 212, 122)',
+  activeResultBackground: '#accaec',
+  resultPreIcon: '<svg t="1642574082983" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2154" width="18" height="18"><path d="M512 85.333333a426.666667 426.666667 0 1 0 426.666667 426.666667A427.136 427.136 0 0 0 512 85.333333z m0 810.666667a384 384 0 1 1 384-384 384.426667 384.426667 0 0 1-384 384z" fill="#999999" p-id="2155"></path><path d="M592.064 348.629333a21.269333 21.269333 0 0 0-30.101333-2.026666l-170.666667 149.333333a21.333333 21.333333 0 0 0 0 32.128l170.666667 149.333333a21.333333 21.333333 0 1 0 28.074666-32.128L437.717333 512l152.32-133.269333a21.333333 21.333333 0 0 0 2.026667-30.101334z" fill="#999999" p-id="2156"></path></svg>',
+  resultNextIcon: '<svg t="1642574011426" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1979" width="18" height="18"><path d="M512 85.333333a426.666667 426.666667 0 1 0 426.666667 426.666667A427.136 427.136 0 0 0 512 85.333333z m0 810.666667a384 384 0 1 1 384-384 384.426667 384.426667 0 0 1-384 384z" fill="#999999" p-id="1980"></path><path d="M462.037333 346.602667a21.333333 21.333333 0 1 0-28.074666 32.128L586.282667 512l-152.32 133.269333a21.333333 21.333333 0 0 0 28.074666 32.128l170.666667-149.333333a21.333333 21.333333 0 0 0 0-32.128z" fill="#999999" p-id="1981"></path></svg>'
 }
 
 if (window.Quill) {

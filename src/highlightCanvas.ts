@@ -1,3 +1,6 @@
+import { RangeType } from './types';
+import { HighlightInfoType, HighlightCanvasOptionsType, CanvasType } from './types/highlightCanvas'
+
 String.prototype.getIndicesOf = function(searchStr: string) {
   let searchStrLen = searchStr.length;
   let startIndex = 0,
@@ -9,26 +12,6 @@ String.prototype.getIndicesOf = function(searchStr: string) {
   }
   return indices;
 };
-
-type HighlightCanvasOptionsType = {
-  activeColor?: string;
-}
-
-export type RangeType = {
-  name: string;
-  color: string;
-  index: number;
-  length: number;
-}
-
-export type HighlightInfoType = {
-  name: string;
-  color: string;
-}
-
-type CanvasType = HTMLCanvasElement & {
-  ctx2D: CanvasRenderingContext2D;
-}
 
 const highlightCanvasContainer: HTMLDivElement[] = [];
 
@@ -142,8 +125,8 @@ class HighlightCanvas {
     let height = this.quill.container.offsetHeight;
     if (!cutover) this._createCanvas(width, height);
     this.canvasGroup.forEach((range: RangeType, i: number) => {
-      let active = i === this.index && this.options.activeColor;
-      let color = active ? this.options.activeColor || range.color : range.color;
+      let active = i === this.index && this.options.activeBackground;
+      let color = active ? this.options.activeBackground : this.options.defaultBackground;
       for (let i = 0; i < range.length; i++) {
         let bounds = this.quill.getBounds(range.index + i, 1);
         let topIndex = Math.floor(bounds.top / HighlightCanvas.CANVAS_MAX_HEIGHT);

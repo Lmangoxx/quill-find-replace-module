@@ -80,7 +80,7 @@
     display: inline-block;
     width: calc(100% - 70px);
     height: 32px;
-    padding: 4px 11px;
+    padding: 4px 92px 4px 11px;
     margin-left: 10px;
     color: rgba(0,0,0,.65);
     font-size: 14px;
@@ -91,5 +91,39 @@
     border-radius: 4px;
     transition: all .3s;
     outline: none;
+  }
+  &-result {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    padding-right: 10px;
+    width: auto;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    align-items: center;
+    cursor: default;
+    .result-action-item {
+      display: none;
+      text-align: center;
+      width: 18px;
+      height: 18px;
+      line-height: 18px;
+      cursor: pointer;
+      vertical-align: middle;
+    }
+    &.found .result-action-item {
+      display: inline-block;
+    }
+    .result-text {
+      width: auto;
+      line-height: 18px;
+      font-size: 12px;
+      padding: 0 8px;
+      display: inline-block;
+      text-align: center;
+      color: #999;
+    }
   }
 }
