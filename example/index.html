@@ -9,323 +9,341 @@
       href="https://lib.baomitu.com/quill/1.3.7/quill.snow.css"
       rel="stylesheet"
     />
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      #editor-scroller {
+        width: 100%;
+        height: calc(100vh - 45px);
+        overflow-x: hidden;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      .ql-container {
+        height: auto !important;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Quill Find Replace Module Demo</h1>
+    <div id="editor-scroller">
+      <div id="editor">
+        <p class="ql-align-justify"><br /></p>
+        <p class="ql-align-justify">
+          <strong class="ql-size-16">故事背景</strong>
+        </p>
+        <p class="ql-align-justify">
+          <span style="color: rgb(174, 170, 170)"
+            >故事发生的时间，包括历史背景，年代（让玩家可以清楚了解自己所处的年代，环境，背景，能够迅速带入其中）</span
+          >
+        </p>
+        <p class="ql-align-justify">&nbsp;</p>
+        <p class="ql-align-justify">示例：</p>
+        <p class="ql-align-justify">
+          在一辆开往D市的列车里，车上有人突然……
+        </p>
+        <p class="ql-align-justify">&nbsp;</p>
+        <p class="ql-align-justify">
+          <strong class="ql-size-16">剧本人数</strong>
+        </p>
+        <p class="ql-align-justify">
+          <span style="color: rgb(174, 170, 170)"
+            >参与游戏的剧本角色人数及主持人人数，通常角色为4-10人（4人及9、10人剧本较少），主持人1人，可根据剧情需求设置是否有NPC演绎</span
+          >
+        </p>
+        <p class="ql-align-justify">
+          <span style="color: rgb(174, 170, 170)">&nbsp;</span>
+        </p>
+        <p class="ql-align-justify">
+          <span style="color: rgb(59, 56, 56)"
+            >示例：6名玩家+1名主持人+1名NPC</span
+          >
+        </p>
+        <p class="ql-align-justify">
+          <span style="color: rgb(118, 113, 113)">&nbsp;</span>
+        </p>
+        <p class="ql-align-justify">
+          <strong class="ql-size-16">游戏时间</strong>
+        </p>
+        <p class="ql-align-justify">
+          <span style="color: rgb(174, 170, 170)">4-6小时不等</span>
+        </p>
+        <p class="ql-align-justify">
+          <span style="color: rgb(118, 113, 113)">&nbsp;</span>
+        </p>
+        <p class="ql-align-justify">
+          <span style="color: rgb(59, 56, 56)">示例：4-5小时</span>
+        </p>
+        <p class="ql-align-justify">
+          <span style="color: rgb(118, 113, 113)">&nbsp;</span>
+        </p>
+        <p class="ql-align-justify">&nbsp;</p>
+        <p class="ql-align-justify">
+          <strong class="ql-size-16">剧本类型</strong>
+        </p>
+        <p class="ql-align-justify">
+          <span style="color: rgb(174, 170, 170)"
+            >类型1：本格/变格/新本格/&nbsp;（选一）</span
+          >
+        </p>
+        <p class="ql-align-justify">
+          <span style="color: rgb(174, 170, 170)"
+            >类型2：推理/情感/还原/恐怖/机制/阵营/（可选一种为侧重点，其中增加其他类型）&nbsp;</span
+          >
+        </p>
+        <p class="ql-align-justify">
+          <span style="color: rgb(174, 170, 170)"
+            >类型3：封闭/开放（选一）</span
+          >
+        </p>
+        <p class="ql-align-justify">
+          <span style="color: rgb(174, 170, 170)">&nbsp;</span>
+        </p>
+        <p class="ql-align-justify">
+          <span style="color: rgb(59, 56, 56)">示例：本格/情感/还原/封闭</span>
+        </p>
+        <p class="ql-align-justify">
+          <span style="color: rgb(59, 56, 56)">&nbsp;</span>
+        </p>
+        <p class="ql-align-justify">
+          <strong class="ql-size-16" style="color: rgb(59, 56, 56)"
+            >游戏流程</strong
+          >
+        </p>
+        <p class="ql-align-justify">
+          <span style="color: rgb(174, 170, 170)"
+            >游戏的流程，包含自我介绍、圆桌讨论、搜证、研读角色剧本、投票、结局、复盘等（在游戏之后主持人进行复盘，每一阶段的流程内容尽量详细，应标明每一阶段的建议时长）</span
+          >
+        </p>
+        <p class="ql-align-justify">
+          <span style="color: rgb(59, 56, 56)">&nbsp;</span>
+        </p>
+        <p class="ql-align-justify">
+          <span style="color: rgb(59, 56, 56)"
+            >示例：主持人介绍背景→分配角色→第一幕研读剧本→自我介绍→圆桌讨论10分钟→搜证、讨论、完成当前阶段任务→第二幕研读剧本→圆桌讨论10分钟→搜证→圆桌讨论120分钟→投票→结局→复盘</span
+          >
+        </p>
+        <p class="ql-align-justify">
+          <span style="color: rgb(59, 56, 56)">&nbsp;</span>
+        </p>
+        <p class="ql-align-justify">
+          <strong class="ql-size-16">搜证规则</strong>
+        </p>
+        <p class="ql-align-justify">
+          <span style="color: rgb(174, 170, 170)"
+            >交代搜证有几轮（多为2-3轮），每轮线索如何发放，每轮的搜证要求（对个人线索与公共线索、地点、人物、玩家的要求等）</span
+          >
+        </p>
+        <p class="ql-align-justify">
+          <span style="color: rgb(174, 170, 170)">&nbsp;</span>
+        </p>
+        <p class="ql-align-justify">
+          <span style="color: rgb(59, 56, 56)"
+            >示例：搜证分为2轮，每轮每位玩家有搜证次数为3次</span
+          >
+        </p>
+        <p class="ql-align-justify">
+          <span style="color: rgb(59, 56, 56)"
+            >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第一轮可搜证……</span
+          >
+        </p>
+        <p class="ql-align-justify">
+          <span style="color: rgb(59, 56, 56)">&nbsp;</span>
+        </p>
+        <p class="ql-align-justify">
+          <strong class="ql-size-16">人物介绍</strong>
+        </p>
+        <p class="ql-align-justify">
+          <span style="color: rgb(174, 170, 170)"
+            >所有玩家角色的年龄、性别、身份、人物特点介绍</span
+          >
+        </p>
+        <p class="ql-align-justify">
+          <span style="color: rgb(174, 170, 170)">&nbsp;</span>
+        </p>
+        <p class="ql-align-justify">
+          <span style="color: rgb(59, 56, 56)"
+            >示例：张三，男，29岁，身材消瘦，性格沉稳，高智商的理工男</span
+          >
+        </p>
+        <p class="ql-align-justify">
+          <span style="color: rgb(59, 56, 56)"
+            >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;王红，女，28岁，面容精致，待人热情，气质优雅的女神</span
+          >
+        </p>
+        <p class="ql-align-justify">
+          <span style="color: rgb(59, 56, 56)">&nbsp;</span>
+        </p>
+        <p class="ql-align-justify">
+          <strong class="ql-size-16" style="color: rgb(59, 56, 56)"
+            >对组织者的建议</strong
+          >
+        </p>
+        <p class="ql-align-justify">
+          <span style="color: rgb(174, 170, 170)"
+            >教组织者如何带动氛围，布置游戏所需道具场景（如有）、引导玩家等建议，有需要玩家一起演绎的小剧场时，要在手册写出来，把组织者需要配合的部分标注清楚。写清每一人物剧本杀重要细节映射的内容及线索卡指向的内容，方便玩家推理受困时主持人进行提示</span
+          >
+        </p>
+        <p class="ql-align-justify">
+          <span style="color: rgb(174, 170, 170)">&nbsp;</span>
+        </p>
+        <p class="ql-align-justify">
+          <span style="color: rgb(59, 56, 56)">示例：</span>
+        </p>
+        <p class="ql-align-justify">
+          <span style="color: rgb(59, 56, 56)"
+            >主持人可以表现的权威一点，引导玩家……</span
+          >
+        </p>
+        <p class="ql-align-justify">
+          <span style="color: rgb(174, 170, 170)">&nbsp;</span>
+        </p>
+        <p class="ql-align-justify">
+          <span style="color: rgb(174, 170, 170)">&nbsp;</span>
+        </p>
+        <p class="ql-align-justify">
+          <strong class="ql-size-16">故事真相</strong>
+        </p>
+        <p data-scene-mark="true">
+          <strong>1.&nbsp;剧本真相</strong>
+        </p>
+        <p class="ql-align-justify">
+          <span style="color: rgb(174, 170, 170)"
+            >交代案件凶手，人物关系，以及详细作案手法、完整的凶案真相和故事真相（不涉及案件的剧本根据故事设定交代真相）</span
+          >
+        </p>
+        <p class="ql-align-justify">
+          <span style="color: rgb(174, 170, 170)">&nbsp;</span>
+        </p>
+        <p class="ql-align-justify">
+          <span style="color: rgb(59, 56, 56)">示例：凶手是张三</span>
+        </p>
+        <p class="ql-align-justify">
+          <span style="color: rgb(59, 56, 56)"
+            >张三与王红是朋友关系，在他发现……</span
+          >
+        </p>
+        <p class="ql-align-justify">
+          <span style="color: rgb(59, 56, 56)">&nbsp;</span>
+        </p>
+        <p data-scene-mark="true">
+          <strong>2.&nbsp;整体背景故事和设定</strong>
+        </p>
+        <p class="ql-align-justify">
+          <span style="color: rgb(174, 170, 170)"
+            >有故事背景的剧本需要让玩家清楚的明白整个剧本框架，可与剧本真相融合一同写明</span
+          >
+        </p>
+        <p class="ql-align-justify">
+          <span style="color: rgb(174, 170, 170)">&nbsp;</span>
+        </p>
+        <p class="ql-align-justify">
+          示例：在距D市50公里的一个小山村里，因总发生一些奇异的现象被称为“鬼村”，有一年……
+        </p>
+        <p class="ql-align-justify">
+          <span style="color: rgb(59, 56, 56)">&nbsp;</span>
+        </p>
+        <p data-scene-mark="true" class="ql-align-justify">
+          <strong>3.故事结局</strong>
+        </p>
+        <p class="ql-align-justify">
+          <span style="color: rgb(174, 170, 170)"
+            >故事的最终结局，结局可为开放性，根据玩家选择或是否投出真凶展现不同结局</span
+          >
+        </p>
+        <p class="ql-align-justify">
+          <span style="color: rgb(174, 170, 170)">&nbsp;</span>
+        </p>
+        <p class="ql-align-justify">
+          <span style="color: rgb(59, 56, 56)"
+            >示例：大雨过后，一缕阳光洒下，照在山脚，张三缓慢从地上爬起……</span
+          >
+        </p>
+        <p class="ql-align-justify">
+          <span style="color: rgb(174, 170, 170)">&nbsp;</span>
+        </p>
+        <p class="ql-align-justify">
+          <strong class="ql-size-16">真相解析</strong>
+        </p>
+        <p data-scene-mark="true">
+          <strong>1.&nbsp;推理思路</strong>
+        </p>
+        <p class="ql-align-justify">
+          <span style="color: rgb(174, 170, 170)"
+            >需要写明可以从谁剧本中的哪一句话或者哪一条线索中得出什么，得到的这些又可以通过什么推出什么，最终指向正确答案</span
+          >
+        </p>
+        <p class="ql-align-justify">
+          <span style="color: rgb(174, 170, 170)">&nbsp;</span>
+        </p>
+        <p class="ql-align-justify">
+          示例：通过王红记忆的矛盾点可以得出她之前的证词是在说谎……
+        </p>
+        <p class="ql-align-justify">
+          <span style="color: rgb(174, 170, 170)">&nbsp;</span>
+        </p>
+        <p><strong>2.&nbsp;线索解析</strong></p>
+        <p class="ql-align-justify">
+          <span style="color: rgb(174, 170, 170)"
+            >线索解析需要列出每条线索信息，并在线索后写明解析过程，多数剧本会以表格形式呈现</span
+          >
+        </p>
+        <p class="ql-align-justify">
+          <span style="color: rgb(174, 170, 170)">&nbsp;</span>
+        </p>
+        <p class="ql-align-justify">
+          示例：线索卡：地点：死者房间&nbsp;线索：床边的柜子&nbsp;解密方法：用死者鞋里的钥匙打开发现U盘&nbsp;
+        </p>
+        <p class="ql-align-justify">
+          <span style="color: rgb(174, 170, 170)">&nbsp;</span>
+        </p>
+        <p data-scene-mark="true">
+          <strong>3.&nbsp;问题解答</strong>
+        </p>
+        <p class="ql-align-justify">
+          <span style="color: rgb(174, 170, 170)"
+            >推理思路是推理正确答案的，剧本中一定还存在一些其他的疑问（一些情节的具体推理过程和线索提示）如名词和设定的解释、角色的秘密，可以用一问一答的形式解答所有剧中的疑点和伏笔，可适当添加图片说明</span
+          >
+        </p>
+        <p class="ql-align-justify">
+          <span style="color: rgb(174, 170, 170)">&nbsp;</span>
+        </p>
+        <p class="ql-align-justify">
+          示例：张三隐藏了什么秘密？
+        </p>
+        <p class="ql-align-justify">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;答：张三曾经是邻国派来的间谍，后因……
+        </p>
+        <p class="ql-align-justify">
+          <span style="color: rgb(174, 170, 170)">&nbsp;</span>
+        </p>
+        <p data-scene-mark="true">
+          <strong>4.&nbsp;总时间线</strong>
+        </p>
+        <p class="ql-align-justify">
+          <span style="color: rgb(174, 170, 170)"
+            >根据剧本设定列出每个人时间线或整体的时间线，用第三人称描写，让玩家一目了然，可添加图片表格说明（如时间对故事推理没有明显影响的剧本可省略）</span
+          >
+        </p>
+        <p class="ql-align-justify">
+          <span style="color: rgb(174, 170, 170)">&nbsp;</span>
+        </p>
+        <p class="ql-align-justify">
+          示例：张三线：早上9点去修车行取车，10点去超市买了日用品……
+        </p>
+        <p><br /></p>
+        <p><br /></p>
+      </div>
+    </div>
     <script
       crossorigin="anonymous"
       integrity="sha384-QUJ+ckWz1M+a7w0UfG1sEn4pPrbQwSxGm/1TIPyioqXBrwuT9l4f9gdHWLDLbVWI"
       src="https://lib.baomitu.com/quill/1.3.7/quill.min.js"
     ></script>
     <script src="../dist/quill-find-replace.min.js"></script>
-  </head>
-
-  <body>
-    <h1>Quill Find Replace Module Demo</h1>
-    <div id="editor" style="min-height: 500px; overflow: auto">
-      <p class="ql-align-justify"><br /></p>
-      <p class="ql-align-justify">
-        <strong class="ql-size-16">故事背景</strong>
-      </p>
-      <p class="ql-align-justify">
-        <span style="color: rgb(174, 170, 170)"
-          >故事发生的时间，包括历史背景，年代（让玩家可以清楚了解自己所处的年代，环境，背景，能够迅速带入其中）</span
-        >
-      </p>
-      <p class="ql-align-justify">&nbsp;</p>
-      <p class="ql-align-justify">示例：</p>
-      <p class="ql-align-justify">
-        在一辆开往D市的列车里，车上有人突然……
-      </p>
-      <p class="ql-align-justify">&nbsp;</p>
-      <p class="ql-align-justify">
-        <strong class="ql-size-16">剧本人数</strong>
-      </p>
-      <p class="ql-align-justify">
-        <span style="color: rgb(174, 170, 170)"
-          >参与游戏的剧本角色人数及主持人人数，通常角色为4-10人（4人及9、10人剧本较少），主持人1人，可根据剧情需求设置是否有NPC演绎</span
-        >
-      </p>
-      <p class="ql-align-justify">
-        <span style="color: rgb(174, 170, 170)">&nbsp;</span>
-      </p>
-      <p class="ql-align-justify">
-        <span style="color: rgb(59, 56, 56)"
-          >示例：6名玩家+1名主持人+1名NPC</span
-        >
-      </p>
-      <p class="ql-align-justify">
-        <span style="color: rgb(118, 113, 113)">&nbsp;</span>
-      </p>
-      <p class="ql-align-justify">
-        <strong class="ql-size-16">游戏时间</strong>
-      </p>
-      <p class="ql-align-justify">
-        <span style="color: rgb(174, 170, 170)">4-6小时不等</span>
-      </p>
-      <p class="ql-align-justify">
-        <span style="color: rgb(118, 113, 113)">&nbsp;</span>
-      </p>
-      <p class="ql-align-justify">
-        <span style="color: rgb(59, 56, 56)">示例：4-5小时</span>
-      </p>
-      <p class="ql-align-justify">
-        <span style="color: rgb(118, 113, 113)">&nbsp;</span>
-      </p>
-      <p class="ql-align-justify">&nbsp;</p>
-      <p class="ql-align-justify">
-        <strong class="ql-size-16">剧本类型</strong>
-      </p>
-      <p class="ql-align-justify">
-        <span style="color: rgb(174, 170, 170)"
-          >类型1：本格/变格/新本格/&nbsp;（选一）</span
-        >
-      </p>
-      <p class="ql-align-justify">
-        <span style="color: rgb(174, 170, 170)"
-          >类型2：推理/情感/还原/恐怖/机制/阵营/（可选一种为侧重点，其中增加其他类型）&nbsp;</span
-        >
-      </p>
-      <p class="ql-align-justify">
-        <span style="color: rgb(174, 170, 170)"
-          >类型3：封闭/开放（选一）</span
-        >
-      </p>
-      <p class="ql-align-justify">
-        <span style="color: rgb(174, 170, 170)">&nbsp;</span>
-      </p>
-      <p class="ql-align-justify">
-        <span style="color: rgb(59, 56, 56)">示例：本格/情感/还原/封闭</span>
-      </p>
-      <p class="ql-align-justify">
-        <span style="color: rgb(59, 56, 56)">&nbsp;</span>
-      </p>
-      <p class="ql-align-justify">
-        <strong class="ql-size-16" style="color: rgb(59, 56, 56)"
-          >游戏流程</strong
-        >
-      </p>
-      <p class="ql-align-justify">
-        <span style="color: rgb(174, 170, 170)"
-          >游戏的流程，包含自我介绍、圆桌讨论、搜证、研读角色剧本、投票、结局、复盘等（在游戏之后主持人进行复盘，每一阶段的流程内容尽量详细，应标明每一阶段的建议时长）</span
-        >
-      </p>
-      <p class="ql-align-justify">
-        <span style="color: rgb(59, 56, 56)">&nbsp;</span>
-      </p>
-      <p class="ql-align-justify">
-        <span style="color: rgb(59, 56, 56)"
-          >示例：主持人介绍背景→分配角色→第一幕研读剧本→自我介绍→圆桌讨论10分钟→搜证、讨论、完成当前阶段任务→第二幕研读剧本→圆桌讨论10分钟→搜证→圆桌讨论120分钟→投票→结局→复盘</span
-        >
-      </p>
-      <p class="ql-align-justify">
-        <span style="color: rgb(59, 56, 56)">&nbsp;</span>
-      </p>
-      <p class="ql-align-justify">
-        <strong class="ql-size-16">搜证规则</strong>
-      </p>
-      <p class="ql-align-justify">
-        <span style="color: rgb(174, 170, 170)"
-          >交代搜证有几轮（多为2-3轮），每轮线索如何发放，每轮的搜证要求（对个人线索与公共线索、地点、人物、玩家的要求等）</span
-        >
-      </p>
-      <p class="ql-align-justify">
-        <span style="color: rgb(174, 170, 170)">&nbsp;</span>
-      </p>
-      <p class="ql-align-justify">
-        <span style="color: rgb(59, 56, 56)"
-          >示例：搜证分为2轮，每轮每位玩家有搜证次数为3次</span
-        >
-      </p>
-      <p class="ql-align-justify">
-        <span style="color: rgb(59, 56, 56)"
-          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第一轮可搜证……</span
-        >
-      </p>
-      <p class="ql-align-justify">
-        <span style="color: rgb(59, 56, 56)">&nbsp;</span>
-      </p>
-      <p class="ql-align-justify">
-        <strong class="ql-size-16">人物介绍</strong>
-      </p>
-      <p class="ql-align-justify">
-        <span style="color: rgb(174, 170, 170)"
-          >所有玩家角色的年龄、性别、身份、人物特点介绍</span
-        >
-      </p>
-      <p class="ql-align-justify">
-        <span style="color: rgb(174, 170, 170)">&nbsp;</span>
-      </p>
-      <p class="ql-align-justify">
-        <span style="color: rgb(59, 56, 56)"
-          >示例：张三，男，29岁，身材消瘦，性格沉稳，高智商的理工男</span
-        >
-      </p>
-      <p class="ql-align-justify">
-        <span style="color: rgb(59, 56, 56)"
-          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;王红，女，28岁，面容精致，待人热情，气质优雅的女神</span
-        >
-      </p>
-      <p class="ql-align-justify">
-        <span style="color: rgb(59, 56, 56)">&nbsp;</span>
-      </p>
-      <p class="ql-align-justify">
-        <strong class="ql-size-16" style="color: rgb(59, 56, 56)"
-          >对组织者的建议</strong
-        >
-      </p>
-      <p class="ql-align-justify">
-        <span style="color: rgb(174, 170, 170)"
-          >教组织者如何带动氛围，布置游戏所需道具场景（如有）、引导玩家等建议，有需要玩家一起演绎的小剧场时，要在手册写出来，把组织者需要配合的部分标注清楚。写清每一人物剧本杀重要细节映射的内容及线索卡指向的内容，方便玩家推理受困时主持人进行提示</span
-        >
-      </p>
-      <p class="ql-align-justify">
-        <span style="color: rgb(174, 170, 170)">&nbsp;</span>
-      </p>
-      <p class="ql-align-justify">
-        <span style="color: rgb(59, 56, 56)">示例：</span>
-      </p>
-      <p class="ql-align-justify">
-        <span style="color: rgb(59, 56, 56)"
-          >主持人可以表现的权威一点，引导玩家……</span
-        >
-      </p>
-      <p class="ql-align-justify">
-        <span style="color: rgb(174, 170, 170)">&nbsp;</span>
-      </p>
-      <p class="ql-align-justify">
-        <span style="color: rgb(174, 170, 170)">&nbsp;</span>
-      </p>
-      <p class="ql-align-justify">
-        <strong class="ql-size-16">故事真相</strong>
-      </p>
-      <p data-scene-mark="true">
-        <strong>1.&nbsp;剧本真相</strong>
-      </p>
-      <p class="ql-align-justify">
-        <span style="color: rgb(174, 170, 170)"
-          >交代案件凶手，人物关系，以及详细作案手法、完整的凶案真相和故事真相（不涉及案件的剧本根据故事设定交代真相）</span
-        >
-      </p>
-      <p class="ql-align-justify">
-        <span style="color: rgb(174, 170, 170)">&nbsp;</span>
-      </p>
-      <p class="ql-align-justify">
-        <span style="color: rgb(59, 56, 56)">示例：凶手是张三</span>
-      </p>
-      <p class="ql-align-justify">
-        <span style="color: rgb(59, 56, 56)"
-          >张三与王红是朋友关系，在他发现……</span
-        >
-      </p>
-      <p class="ql-align-justify">
-        <span style="color: rgb(59, 56, 56)">&nbsp;</span>
-      </p>
-      <p data-scene-mark="true">
-        <strong>2.&nbsp;整体背景故事和设定</strong>
-      </p>
-      <p class="ql-align-justify">
-        <span style="color: rgb(174, 170, 170)"
-          >有故事背景的剧本需要让玩家清楚的明白整个剧本框架，可与剧本真相融合一同写明</span
-        >
-      </p>
-      <p class="ql-align-justify">
-        <span style="color: rgb(174, 170, 170)">&nbsp;</span>
-      </p>
-      <p class="ql-align-justify">
-        示例：在距D市50公里的一个小山村里，因总发生一些奇异的现象被称为“鬼村”，有一年……
-      </p>
-      <p class="ql-align-justify">
-        <span style="color: rgb(59, 56, 56)">&nbsp;</span>
-      </p>
-      <p data-scene-mark="true" class="ql-align-justify">
-        <strong>3.故事结局</strong>
-      </p>
-      <p class="ql-align-justify">
-        <span style="color: rgb(174, 170, 170)"
-          >故事的最终结局，结局可为开放性，根据玩家选择或是否投出真凶展现不同结局</span
-        >
-      </p>
-      <p class="ql-align-justify">
-        <span style="color: rgb(174, 170, 170)">&nbsp;</span>
-      </p>
-      <p class="ql-align-justify">
-        <span style="color: rgb(59, 56, 56)"
-          >示例：大雨过后，一缕阳光洒下，照在山脚，张三缓慢从地上爬起……</span
-        >
-      </p>
-      <p class="ql-align-justify">
-        <span style="color: rgb(174, 170, 170)">&nbsp;</span>
-      </p>
-      <p class="ql-align-justify">
-        <strong class="ql-size-16">真相解析</strong>
-      </p>
-      <p data-scene-mark="true">
-        <strong>1.&nbsp;推理思路</strong>
-      </p>
-      <p class="ql-align-justify">
-        <span style="color: rgb(174, 170, 170)"
-          >需要写明可以从谁剧本中的哪一句话或者哪一条线索中得出什么，得到的这些又可以通过什么推出什么，最终指向正确答案</span
-        >
-      </p>
-      <p class="ql-align-justify">
-        <span style="color: rgb(174, 170, 170)">&nbsp;</span>
-      </p>
-      <p class="ql-align-justify">
-        示例：通过王红记忆的矛盾点可以得出她之前的证词是在说谎……
-      </p>
-      <p class="ql-align-justify">
-        <span style="color: rgb(174, 170, 170)">&nbsp;</span>
-      </p>
-      <p><strong>2.&nbsp;线索解析</strong></p>
-      <p class="ql-align-justify">
-        <span style="color: rgb(174, 170, 170)"
-          >线索解析需要列出每条线索信息，并在线索后写明解析过程，多数剧本会以表格形式呈现</span
-        >
-      </p>
-      <p class="ql-align-justify">
-        <span style="color: rgb(174, 170, 170)">&nbsp;</span>
-      </p>
-      <p class="ql-align-justify">
-        示例：线索卡：地点：死者房间&nbsp;线索：床边的柜子&nbsp;解密方法：用死者鞋里的钥匙打开发现U盘&nbsp;
-      </p>
-      <p class="ql-align-justify">
-        <span style="color: rgb(174, 170, 170)">&nbsp;</span>
-      </p>
-      <p data-scene-mark="true">
-        <strong>3.&nbsp;问题解答</strong>
-      </p>
-      <p class="ql-align-justify">
-        <span style="color: rgb(174, 170, 170)"
-          >推理思路是推理正确答案的，剧本中一定还存在一些其他的疑问（一些情节的具体推理过程和线索提示）如名词和设定的解释、角色的秘密，可以用一问一答的形式解答所有剧中的疑点和伏笔，可适当添加图片说明</span
-        >
-      </p>
-      <p class="ql-align-justify">
-        <span style="color: rgb(174, 170, 170)">&nbsp;</span>
-      </p>
-      <p class="ql-align-justify">
-        示例：张三隐藏了什么秘密？
-      </p>
-      <p class="ql-align-justify">
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;答：张三曾经是邻国派来的间谍，后因……
-      </p>
-      <p class="ql-align-justify">
-        <span style="color: rgb(174, 170, 170)">&nbsp;</span>
-      </p>
-      <p data-scene-mark="true">
-        <strong>4.&nbsp;总时间线</strong>
-      </p>
-      <p class="ql-align-justify">
-        <span style="color: rgb(174, 170, 170)"
-          >根据剧本设定列出每个人时间线或整体的时间线，用第三人称描写，让玩家一目了然，可添加图片表格说明（如时间对故事推理没有明显影响的剧本可省略）</span
-        >
-      </p>
-      <p class="ql-align-justify">
-        <span style="color: rgb(174, 170, 170)">&nbsp;</span>
-      </p>
-      <p class="ql-align-justify">
-        示例：张三线：早上9点去修车行取车，10点去超市买了日用品……
-      </p>
-      <p><br /></p>
-      <p><br /></p>
-    </div>
     <script src="main.js"></script>
   </body>
 </html>

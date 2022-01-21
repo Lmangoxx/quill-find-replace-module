@@ -138,7 +138,7 @@ class HighlightCanvas {
           this._paint(bottomIndex, color, bounds);
         }
         this.canvasIsClear = false;
-        let scrollingContainer = this.quill.scrollingContainer;
+        const scrollingContainer = this.quill.scrollingContainer;
         if (
           !this.quill.hasFocus() &&
           active &&
